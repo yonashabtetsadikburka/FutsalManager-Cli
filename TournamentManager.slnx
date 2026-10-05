@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/TournamentManager.Cli/TournamentManager.Cli.csproj" />
+    <Project Path="src/TournamentManager.Core/TournamentManager.Core.csproj" />
+    <Project Path="src/TournamentManager.Infrastructure/TournamentManager.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/TournamentManager.Tests/TournamentManager.Tests.csproj" />
+  </Folder>
+</Solution>
