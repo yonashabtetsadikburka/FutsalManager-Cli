@@ -6,6 +6,9 @@
 # cartella docs
 docs/
 
+# appunti privati locali (solo tuo PC, mai su GitHub)
+.notes/
+
 # dotenv files
 .env
 
