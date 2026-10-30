@@ -27,9 +27,9 @@ public class Team
         }
     }
 
-    public Player AddPlayer(string playerName)
+    public Player AddPlayer(string playerName, int? shirtNumber = null)
     {
-        var player = new Player(playerName);
+        var player = new Player(playerName, shirtNumber);
         AddPlayer(player);
         return player;
     }
@@ -40,6 +40,11 @@ public class Team
         if(_players.Count >= MaxPlayers)
         {
             throw new DomainException($"A team cannot have more than {MaxPlayers} players.");        
+        }
+
+        if(player.ShirtNumber is not null &&     _players.Any(p => player.ShirtNumber == player.ShirtNumber))
+        {
+            throw new DomainException($"Shirt number {player.ShirtNumber} is already taken in team '{Name}'.");
         }
 
         var alreadyExists = _players.Any(p => string.Equals(p.Name, player.Name, StringComparison.OrdinalIgnoreCase));

@@ -31,7 +31,7 @@ public class JsonTournamentRepositoryTests : IDisposable
     {
         var tournament = new Tournament("Summer Cup");
         var alpha = tournament.AddTeam("Alpha");
-        var mario = alpha.AddPlayer("Mario");
+        var mario = alpha.AddPlayer("Mario", 9);
         tournament.AddTeam("Beta");
         tournament.Start(new RoundRobinScheduleGenerator());
 
@@ -47,6 +47,7 @@ public class JsonTournamentRepositoryTests : IDisposable
         Assert.Single(loaded.Matches);
         Assert.True(loaded.Matches[0].IsPlayed);
         Assert.Equal(1, loaded.GetTopScorers()[0].Goals);
+        Assert.Equal(9, loaded.Teams[0].Players[0].ShirtNumber);
     }
 
     [Fact]

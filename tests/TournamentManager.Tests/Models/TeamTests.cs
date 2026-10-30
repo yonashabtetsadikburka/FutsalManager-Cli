@@ -42,4 +42,23 @@ public class TeamTests
 
         Assert.Throws<DomainException>(() => team.AddPlayer("One too many"));
     }
+
+    [Fact]
+    public void AddPlayer_DuplicateShirtNumber_Throws()
+    {
+        var team = new Team("Red Lions");
+        team.AddPlayer("Mario", 10);
+
+        Assert.Throws<DomainException>(() => team.AddPlayer("Luigi", 10));
+    }
+
+    [Fact]
+    public void AddPlayer_SeveralPlayersWithoutNumber_IsAllowed()
+    {
+        var team = new Team("Red Lions");
+        team.AddPlayer("Mario");
+        team.AddPlayer("Luigi");
+
+        Assert.Equal(2, team.Players.Count);
+    }
 }

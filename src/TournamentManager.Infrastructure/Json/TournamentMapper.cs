@@ -28,7 +28,7 @@ public static class TournamentMapper
         return new TeamDto(
             team.Id,
             team.Name,
-            team.Players.Select(p => new PlayerDto(p.Id, p.Name)).ToList());
+            team.Players.Select(p => new PlayerDto(p.Id, p.Name, p.ShirtNumber)).ToList());
         
     }
 
@@ -51,7 +51,7 @@ public static class TournamentMapper
 
     private static Team ToTeam(TeamDto dto)
     {
-        var players = dto.Players.Select(p => new Player(p.Id, p.Name));
+        var players = dto.Players.Select(p => new Player(p.Id, p.Name, p.ShirtNumber));
         return new Team(dto.Id, dto.Name, players);
     }
 

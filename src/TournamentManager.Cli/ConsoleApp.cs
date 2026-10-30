@@ -209,7 +209,18 @@ public class ConsoleApp
         );
 
         var playerName = AnsiConsole.Ask<string>("Player [green]name[/]:");
-        team.AddPlayer(playerName);
+        var numberText = AnsiConsole.Prompt(new TextPrompt<string>("Shirt number (1-99, leave empty to skip): ").AllowEmpty());
+
+        int? playerShirtNumber = null;
+        if (!string.IsNullOrWhiteSpace(numberText))
+        {
+            if(!int.TryParse(numberText, out var parsed))
+            {
+                throw new DomainException("Shirt number must be a number.");
+            }
+            playerShirtNumber = parsed;
+        }
+        team.AddPlayer(playerName, playerShirtNumber);
         _repository.Save(tournament);
     }
 

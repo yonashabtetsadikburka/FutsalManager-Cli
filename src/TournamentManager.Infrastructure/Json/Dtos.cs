@@ -1,6 +1,6 @@
 namespace TournamentManager.Infrastructure.Json;
 
-public record PlayerDto(Guid Id, string Name);
+public record PlayerDto(Guid Id, string Name, int? ShirtNumber = null);
 public record TeamDto(Guid Id, string Name, List<PlayerDto> Players);
 public record GoalDto(Guid TeamId, Guid PlayerId);
 
