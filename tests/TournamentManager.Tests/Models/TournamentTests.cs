@@ -119,4 +119,33 @@ public class TournamentTests
         Assert.Throws<DomainException>(() =>
             tournament.RecordResult(match.Id, new MatchResult(1, 0, scorers)));
     }
+
+    [Fact]
+    public void RemovePlayer_PlayersWithGoals_Throw()
+    {
+        var tournament = new Tournament("Test Cup");
+        var alpha = tournament.AddTeam("Alpha");
+        var mario = alpha.AddPlayer("Mario");
+        tournament.AddTeam("Beta");
+        tournament.Start(new RoundRobinScheduleGenerator());
+
+        var match = tournament.Matches[0];
+
+        tournament.RecordResult(match.Id,
+            new MatchResult(1, 0, new[] { new Goal(alpha.Id, mario.Id) }));
+
+        Assert.Throws<DomainException>(() => tournament.RemovePlayer(alpha.Id, mario.Id));
+    }
+
+    [Fact]
+    public void RemovePlayer_PlayerWithoutGoals_RemovesIt()
+    {
+        var tournament = new Tournament("Test Cup");
+        var alpha = tournament.AddTeam("Alpha");
+        var mario = alpha.AddPlayer("Mario");
+
+        tournament.RemovePlayer(alpha.Id, mario.Id);
+
+        Assert.Empty(alpha.Players);
+    }
 }

@@ -56,4 +56,12 @@ public class Team
 
         _players.Add(player);
     }
+
+    public void RemovePlayer(Guid playerId)
+    {   
+        var player = _players.FirstOrDefault(p => p.Id == playerId)
+        ?? throw new DomainException("Player not found in this team!");
+        _players.Remove(player);
+        
+    }
 }

@@ -34,6 +34,21 @@ public class Tournament
 
     }
 
+    public void RemovePlayer(Guid teamID, Guid playerId)
+    {
+        var team = GetTeam(teamID);
+        var hasScored = _matches
+        .Where(m => m.IsPlayed)
+        .SelectMany(m => m.Result!.Goals)
+        .Any(g => g.PlayerId == playerId);
+
+        if (hasScored)
+        {
+            throw new DomainException("Cannot remove a player who has scored goals!");
+        }
+        team.RemovePlayer(playerId);
+    }
+
     public Team AddTeam(string teamName)
     {
         if (IsStarted)
