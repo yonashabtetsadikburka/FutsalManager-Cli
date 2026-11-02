@@ -3,8 +3,8 @@
 ##
 ## Get latest from `dotnet new gitignore`
 
-# cartella docs
-docs/
+# cartella doc
+doc/
 
 # appunti privati locali (solo tuo PC, mai su GitHub)
 .notes/
